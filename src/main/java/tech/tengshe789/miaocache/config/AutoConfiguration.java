@@ -1,5 +1,7 @@
 package tech.tengshe789.miaocache.config;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
 /**
  * @program: miaocache
  * @description:
