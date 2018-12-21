@@ -13,7 +13,7 @@ import java.util.Properties;
 
 /**
  * @program: miaocache
- * @description:
+ * @description: 从多个数据源读取.Properties文件
  * @author: tEngSHe789
  * @create: 2018-12-21 08:54
  **/

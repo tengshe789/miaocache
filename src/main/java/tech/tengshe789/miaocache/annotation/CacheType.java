@@ -9,5 +9,5 @@ package tech.tengshe789.miaocache.annotation;
 public enum CacheType {
     REDIS,
     LOCAL,
-    BOTH
+    BOTH;
 }

@@ -3,6 +3,7 @@ package tech.tengshe789.miaocache.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.BinaryClient;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -12,12 +13,14 @@ import java.util.*;
 
 /**
  * @program: miaocache
- * @description:
+ * @description: 使用jedis实现redis操作
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  * @create: 2018-12-21 12:06
  **/
 @Slf4j
+@Service
 public class RedisServiceImpl implements RedisService {
+
     @Autowired
     JedisPool jedisPool;
 

@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
  * @description: 生成key
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  **/
-public abstract class IKeyGenerator {
+public interface KeyGenerator {
 
     /**
      * 生成key
@@ -16,6 +16,6 @@ public abstract class IKeyGenerator {
      * @param params
      * @return
      */
-    public abstract String buildKey(Object target, Method method, Object... params);
+    public String generateKey(Object target, Method method, Object... params);
 
 }

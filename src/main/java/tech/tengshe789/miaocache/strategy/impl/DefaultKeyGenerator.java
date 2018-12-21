@@ -1,38 +1,19 @@
 package tech.tengshe789.miaocache.strategy.impl;
 
-import tech.tengshe789.miaocache.strategy.IKeyGenerator;
+import tech.tengshe789.miaocache.domain.DefaultKey;
+import tech.tengshe789.miaocache.strategy.KeyGenerator;
+import tech.tengshe789.miaocache.utils.SerializationUtil;
 
 import java.lang.reflect.Method;
 
+
 /**
  * @program: miaocache
- * @description:
+ * @description: 默认key的生成策略
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  * @create: 2018-12-21 10:37
  **/
-public class DefaultKeyGenerator extends IKeyGenerator {
-
-    /**
-     * 数据源ID
-     */
-    private String dataSourceId;
-
-    /**
-     * 调用目标对象全类名
-     */
-    private String targetClassName;
-
-    /**
-     * 调用目标方法名称
-     */
-    private String methodName;
-
-    /**
-     * 调用目标参数
-     */
-    private Object[] params;
-
-//    private final int hashCode;
+public class DefaultKeyGenerator implements KeyGenerator {
 
     /**
      * 生成key
@@ -43,7 +24,9 @@ public class DefaultKeyGenerator extends IKeyGenerator {
      * @return
      */
     @Override
-    public String buildKey(Object target, Method method, Object... params) {
-        return null;
+    public String generateKey(Object target, Method method, Object... params) {
+        DefaultKey defaultKey = new DefaultKey(target, method, params);
+        String json = SerializationUtil.beanToJson(defaultKey);
+        return json;
     }
 }

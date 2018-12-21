@@ -16,7 +16,7 @@ public class SerializationUtil<T> {
      * @param <T>
      * @return
      */
-    public <T> T jsonToBean(String json, Class<T> clazz){
+    public static <T> T jsonToBean(String json, Class<T> clazz){
         if(json == null || json.length() <= 0 || clazz == null) {
             return null;
         }

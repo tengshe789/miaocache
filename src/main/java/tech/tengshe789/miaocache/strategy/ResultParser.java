@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
  * @description: 解析缓存
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  **/
-public interface IResultParser {
+public interface ResultParser {
 
     public Object parse (Object target, Method method, Object... params) ;
 

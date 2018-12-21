@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 
 /**
  * @program: miaocache
- * @description:
+ * @description: Jedis配置类
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  * @create: 2018-12-20 22:20
  **/
@@ -35,7 +35,7 @@ public class JedisConfig {
     //TODO 可以继续定义数据
 
     /**
-     * 配置redis
+     * 使用PropertiesUtil或者environment读取配置
      */
     @PostConstruct
     public void loadRedisConfiguration(){
@@ -65,6 +65,10 @@ public class JedisConfig {
         }
     }
 
+    /**
+     * jedis连接池工厂
+     * @return
+     */
     @Bean("JedisPool")
     public JedisPool jedisPoolFactory() {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
