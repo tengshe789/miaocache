@@ -52,7 +52,7 @@ public interface RedisService {
      * @param value
      * @return 成功 返回OK 失败返回 0
      */
-    String set(String key, String value);
+    boolean set(String key, String value);
 
     /**
      * <p>
@@ -66,7 +66,7 @@ public interface RedisService {
      * @param value
      * @return 成功 返回OK 失败返回 0
      */
-    String set(String key, String value, int expire);
+    boolean set(String key, String value, int expire);
 
     /**
      * <p>
@@ -111,7 +111,9 @@ public interface RedisService {
 
     /**
      * <p>
-     * 设置key value,如果key已经存在则返回0,nx==> not exist
+     * SETNX ：SET if Not eXists （如果不存在，则 SET)的简写；
+     *
+     * 隐藏的意思是：key存在的情况下，不操作redis内存；也就是返回值是0
      * </p>
      *
      * @param key
