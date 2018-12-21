@@ -14,4 +14,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.TYPE,ElementType.METHOD})
 public @interface CacheCreated {
+
+    public String key() default "";
+
+    public String desc() default "";
+
+    public int expire() default 720;
 }
