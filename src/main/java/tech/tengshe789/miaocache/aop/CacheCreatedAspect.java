@@ -1,7 +1,6 @@
 package tech.tengshe789.miaocache.aop;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.tengshe789.miaocache.annotation.CacheCreated;
 import tech.tengshe789.miaocache.api.CacheApi;
+import tech.tengshe789.miaocache.strategy.impl.DefaultKeyGenerator;
 import tech.tengshe789.miaocache.strategy.impl.DefaultKeyParser;
 
 import java.lang.reflect.Method;
@@ -28,7 +28,7 @@ import java.lang.reflect.Type;
 public class CacheCreatedAspect {
 
     @Autowired
-    private DefaultKeyParser parser;
+    private DefaultKeyGenerator generator;
 
     @Autowired
     private CacheApi cacheApi;
@@ -52,10 +52,9 @@ public class CacheCreatedAspect {
         String value = "";
 
         try {
-            key = parser.parse(key);
+            key = generator.generateKey(key);
             value = cacheApi.get(key);
             Type genericReturnType = method.getGenericReturnType();
-            result = parser.getResult();
         }catch (Exception e){
             log.info("获取缓存失败:{}",key);
         }finally {

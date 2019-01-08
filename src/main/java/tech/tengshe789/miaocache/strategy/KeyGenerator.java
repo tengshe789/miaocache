@@ -1,7 +1,5 @@
 package tech.tengshe789.miaocache.strategy;
 
-import java.lang.reflect.Method;
-
 /**
  * @program: miaocache
  * @description: 生成key
@@ -11,11 +9,9 @@ public interface KeyGenerator {
 
     /**
      * 生成key
-     * @param target
-     * @param method
-     * @param params
+     * @param key
      * @return
      */
-    public String generateKey(Object target, Method method, Object... params);
+    public String generateKey(String prefix , String key);
 
 }

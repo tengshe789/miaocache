@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.validation.constraints.NotNull;
 import javax.xml.crypto.Data;
 
@@ -17,17 +16,20 @@ import javax.xml.crypto.Data;
  **/
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class CacheBean {
+    private String prefix;
 
     @NotNull
     private String key;
 
-    private String description;
-
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Data expireTime;
 
+    private String description;
 
+    public CacheBean (String key) {
+        this.key = key;
+    }
 }
