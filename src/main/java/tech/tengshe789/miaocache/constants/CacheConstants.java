@@ -7,5 +7,6 @@ package tech.tengshe789.miaocache.constants;
  * @create: 2018-12-20 21:38
  **/
 public class CacheConstants {
+    public static String COMMON_PREFIX = "common";
 
 }

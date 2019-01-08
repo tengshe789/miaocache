@@ -1,4 +1,4 @@
-package tech.tengshe789.miaocache.annotation;
+package tech.tengshe789.miaocache.constants;
 
 /**
  * @program: miaocache

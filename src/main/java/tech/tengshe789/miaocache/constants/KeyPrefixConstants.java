@@ -7,5 +7,6 @@ package tech.tengshe789.miaocache.constants;
  * @create: 2018-12-21 15:21
  **/
 public class KeyPrefixConstants {
-    public final String GOODSLISTS = "";
+    public static final String DEFAULT_PREFIX = "cache";
+    public static final String GOODSLISTS = "";
 }
