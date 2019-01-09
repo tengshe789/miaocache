@@ -8,21 +8,21 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import tech.tengshe789.miaocache.api.impl.GuavaCacheApi;
+import tech.tengshe789.miaocache.api.impl.RedisCacheApi;
 import tech.tengshe789.miaocache.constants.CacheType;
 import tech.tengshe789.miaocache.annotation.CreatedCache;
-import tech.tengshe789.miaocache.api.CacheApi;
 import tech.tengshe789.miaocache.constants.KeyPrefixConstants;
 import tech.tengshe789.miaocache.domain.CacheBean;
 import tech.tengshe789.miaocache.exception.CacheObjectErrorException;
 import tech.tengshe789.miaocache.exception.SetCacheErrorException;
 import tech.tengshe789.miaocache.strategy.KeyGenerator;
-import tech.tengshe789.miaocache.strategy.KeyParser;
-import tech.tengshe789.miaocache.strategy.impl.DefaultKeyParser;
+import tech.tengshe789.miaocache.utils.SerializationUtil;
 
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Method;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @program: miao-cache
@@ -36,7 +36,14 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CreatedCacheAspect {
 
     @Autowired
-    private CacheApi cacheApi;
+    @Qualifier("DefaultKeyGenerator")
+    KeyGenerator generator;
+
+    @Autowired
+    private RedisCacheApi redisApi;
+
+    @Autowired
+    private GuavaCacheApi guavaApi;
 
     @Pointcut("@annotation(tech.tengshe789.miaocache.annotation.CreatedCache)")
     public void aspect(){
@@ -94,12 +101,24 @@ public class CreatedCacheAspect {
     }
 
     private boolean setKeyByRedis(CacheBean cacheBean) {
-        //TODO 设置缓存到redis
+        @NotNull String key = cacheBean.getKey();
+        String prefix = cacheBean.getPrefix();
+        Class value = cacheBean.getValue();
+        String realValue = SerializationUtil.beanToJson(value);
+        String realKey = generator.generateKey(prefix, key);
+        int expireTime = cacheBean.getExpireTime();
+        redisApi.set(realKey,realValue,expireTime);
         return true;
     }
 
     private boolean setKeyByLocal (CacheBean cacheBean) {
-        //TODO 添加缓存到本地
+        @NotNull String key = cacheBean.getKey();
+        String prefix = cacheBean.getPrefix();
+        Class value = cacheBean.getValue();
+        String realValue = SerializationUtil.beanToJson(value);
+        String realKey = generator.generateKey(prefix, key);
+        int expireTime = cacheBean.getExpireTime();
+        guavaApi.set(realKey,realValue,expireTime);
         return true;
     }
 

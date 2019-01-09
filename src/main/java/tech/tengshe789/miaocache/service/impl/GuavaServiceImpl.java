@@ -3,6 +3,7 @@ package tech.tengshe789.miaocache.service.impl;
 import com.google.common.cache.CacheBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import tech.tengshe789.miaocache.service.GuavaService;
 
 import javax.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  * @create: 2019-01-09 14:45
  **/
+@Service
 public class GuavaServiceImpl implements GuavaService {
     @Autowired
     @Qualifier("GuavaBuilder")
@@ -40,8 +42,8 @@ public class GuavaServiceImpl implements GuavaService {
     }
 
     @Override
-    public boolean delete(@NotNull String key) {
+    public Long delete(@NotNull String key) {
         builder.build().invalidate(key);
-        return true;
+        return 0L;
     }
 }

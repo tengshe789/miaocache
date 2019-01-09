@@ -15,6 +15,6 @@ public interface GuavaService {
 
     public boolean set(@NotNull String key, String value , int expireTime) ;
 
-    public boolean delete (@NotNull String key);
+    public Long delete (@NotNull String key);
 
 }

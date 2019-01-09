@@ -1,34 +1,24 @@
 package tech.tengshe789.miaocache.api.impl;
 
-
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.lang.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tech.tengshe789.miaocache.api.CacheApi;
-import tech.tengshe789.miaocache.config.JedisConfig;
 import tech.tengshe789.miaocache.domain.CacheBean;
-import tech.tengshe789.miaocache.service.RedisService;
-import tech.tengshe789.miaocache.strategy.KeyParser;
-import tech.tengshe789.miaocache.utils.SerializationUtil;
+import tech.tengshe789.miaocache.service.GuavaService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @program: miaocache
- * @description: Redis 接口
+ * @description: Guava 接口
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
- * @create: 2018-12-21 11:32
+ * @create: 2019-01-09 18:39
  **/
-@Service("RedisCacheApi")
-public class RedisCacheApi implements CacheApi {
+@Service("GuavaCacheApi")
+public class GuavaCacheApi implements CacheApi {
     @Autowired
-    JedisConfig jedisConfig;
-
-    @Autowired
-    RedisService redisService;
-
+    GuavaService guavaService;
     /**
      * 根据key获取对象
      *
@@ -37,14 +27,9 @@ public class RedisCacheApi implements CacheApi {
      */
     @Override
     public String get(String key) {
-        if (!isEnabled()){
-            return null;
-        }
-        if (StrUtil.isBlank(key)){
-            return null;
-        }
-        String jsonValue = redisService.get(key);
-        return jsonValue;
+        Assert.notBlank(key);
+        guavaService.get(key);
+        return null;
     }
 
     /**
@@ -56,10 +41,12 @@ public class RedisCacheApi implements CacheApi {
      */
     @Override
     public void set(String key, String value, int expireMin) {
-        if (!isEnabled()){
-            return;
+        Assert.notBlank(key);
+        Assert.notBlank(value);
+        if (expireMin < 0) {
+            expireMin = 0;
         }
-        redisService.set(key,(String) value,expireMin);
+        guavaService.set(key,value,expireMin);
     }
 
     /**
@@ -70,10 +57,7 @@ public class RedisCacheApi implements CacheApi {
      */
     @Override
     public Long remove(String key) {
-        if (!isEnabled()){
-            return 0L;
-        }
-        return redisService.decr(key);
+        return guavaService.delete(key);
     }
 
     /**
@@ -83,12 +67,9 @@ public class RedisCacheApi implements CacheApi {
      * @return
      */
     @Override
+    @Deprecated
     public Long remove(String... keys) {
-        if (!isEnabled()){
-            return 0L;
-        }
-        Long del = redisService.del(keys);
-        return del;
+        return null;
     }
 
     /**
@@ -98,12 +79,9 @@ public class RedisCacheApi implements CacheApi {
      * @return
      */
     @Override
+    @Deprecated
     public Long removeByPre(String pre) {
-        if (!isEnabled()){
-            return 0L;
-        }
-        Long delPre = redisService.delPre(pre);
-        return delPre;
+        return null;
     }
 
     /**
@@ -113,11 +91,8 @@ public class RedisCacheApi implements CacheApi {
      * @return
      */
     @Override
+    @Deprecated
     public List<CacheBean> getCacheBeanByPre(String pre) {
-        Set<String> preSet = redisService.getByPre(pre);
-        preSet.forEach(s -> {
-
-        });
         return null;
     }
 
@@ -127,11 +102,8 @@ public class RedisCacheApi implements CacheApi {
      * @return
      */
     @Override
+    @Deprecated
     public List<CacheBean> listAll() {
         return null;
-    }
-
-    public boolean isEnabled() {
-        return Boolean.parseBoolean(jedisConfig.getEnable());
     }
 }

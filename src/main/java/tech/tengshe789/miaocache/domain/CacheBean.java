@@ -25,9 +25,5 @@ public class CacheBean {
 
     public int expireTime;
 
-    public String description;
-
-    public CacheBean (String key) {
-        this.key = key;
-    }
+    public Class value;
 }

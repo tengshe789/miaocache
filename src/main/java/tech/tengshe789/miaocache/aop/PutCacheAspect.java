@@ -6,13 +6,18 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import tech.tengshe789.miaocache.annotation.PutCache;
+import tech.tengshe789.miaocache.api.impl.GuavaCacheApi;
+import tech.tengshe789.miaocache.api.impl.RedisCacheApi;
 import tech.tengshe789.miaocache.constants.CacheType;
 import tech.tengshe789.miaocache.constants.KeyPrefixConstants;
 import tech.tengshe789.miaocache.domain.CacheBean;
 import tech.tengshe789.miaocache.exception.CacheObjectErrorException;
 import tech.tengshe789.miaocache.exception.SetCacheErrorException;
+import tech.tengshe789.miaocache.strategy.KeyGenerator;
 
 import javax.validation.constraints.NotNull;
 
@@ -26,6 +31,15 @@ import javax.validation.constraints.NotNull;
 @Aspect
 @Service
 public class PutCacheAspect {
+    @Autowired
+    @Qualifier("DefaultKeyGenerator")
+    KeyGenerator generator;
+
+    @Autowired
+    private RedisCacheApi redisApi;
+
+    @Autowired
+    private GuavaCacheApi guavaApi;
 
 
     @Pointcut("@annotation(tech.tengshe789.miaocache.annotation.PutCache)")
@@ -61,6 +75,7 @@ public class PutCacheAspect {
 
     private void putCacheViaRedis(CacheBean cacheBean) {
         //TODO redis put操作
+
     }
 
     private boolean putCacheViaLoacl(CacheBean cacheBean) {

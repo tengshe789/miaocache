@@ -6,12 +6,19 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import tech.tengshe789.miaocache.annotation.DeleteCache;
+import tech.tengshe789.miaocache.api.impl.GuavaCacheApi;
+import tech.tengshe789.miaocache.api.impl.RedisCacheApi;
 import tech.tengshe789.miaocache.constants.KeyPrefixConstants;
 import tech.tengshe789.miaocache.domain.CacheBean;
 import tech.tengshe789.miaocache.exception.CacheObjectErrorException;
 import tech.tengshe789.miaocache.exception.SetCacheErrorException;
+import tech.tengshe789.miaocache.strategy.KeyGenerator;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @program: miao-cache
@@ -23,6 +30,15 @@ import tech.tengshe789.miaocache.exception.SetCacheErrorException;
 @Aspect
 @Service
 public class DeleteCacheAspect {
+    @Autowired
+    @Qualifier("DefaultKeyGenerator")
+    KeyGenerator generator;
+
+    @Autowired
+    private RedisCacheApi redisApi;
+
+    @Autowired
+    private GuavaCacheApi guavaApi;
 
 
     @Pointcut("@annotation(tech.tengshe789.miaocache.annotation.DeleteCache)")
@@ -54,9 +70,16 @@ public class DeleteCacheAspect {
     }
 
     private void clearCacheViaRedis(CacheBean cacheBean) {
-
+        @NotNull String key = cacheBean.getKey();
+        String prefix = cacheBean.getPrefix();
+        String realKey = generator.generateKey(prefix,key);
+        redisApi.remove(realKey);
     }
 
-    private void clearCacheViaLocal(CacheBean cacheBean) {
+    private long clearCacheViaLocal(CacheBean cacheBean) {
+        @NotNull String key = cacheBean.getKey();
+        String prefix = cacheBean.getPrefix();
+        String realKey = generator.generateKey(prefix,key);
+        return guavaApi.remove(key);
     }
 }

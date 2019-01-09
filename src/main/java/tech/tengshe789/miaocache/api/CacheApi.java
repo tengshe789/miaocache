@@ -24,16 +24,8 @@ public interface CacheApi {
      * @param value
      * @param expireMin
      */
-    public void set(String key, Object value, int expireMin);
+    public void set(String key, String value, int expireMin);
 
-    /**
-     * 保存缓存
-     * @param key
-     * @param value
-     * @param expireMin
-     * @param desc
-     */
-    public void set(String key, Object value, int expireMin, String desc);
 
     /**
      * 移除单个缓存

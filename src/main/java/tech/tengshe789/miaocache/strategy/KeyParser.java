@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 public interface KeyParser {
 
     /**
-     * 解析key
+     * 将key解析 成 对象
      * @param prefix
      * @param realKey
      * @param clazz

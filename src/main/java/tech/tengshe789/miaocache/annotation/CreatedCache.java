@@ -30,10 +30,10 @@ public @interface CreatedCache {
     public String keyPrefix() default KeyPrefixConstants.DEFAULT_PREFIX;
 
     /**
-     * key的描述
+     * key的value
      * @return
      */
-    public String desc() default "";
+    public String value() default "";
 
     /**
      * key的过期时间

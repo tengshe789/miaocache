@@ -1,6 +1,8 @@
 package tech.tengshe789.miaocache.config;
 
 import cn.hutool.core.util.StrUtil;
+import lombok.Data;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,16 +14,21 @@ import tech.tengshe789.miaocache.utils.PropertiesUtil;
 import javax.annotation.PostConstruct;
 
 /**
- * @program: miaocache
+ * @program: miao-cache
  * @description: Jedis配置类
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  * @create: 2018-12-20 22:20
  **/
 @Configuration
+@Data
 public class JedisConfig {
     @Autowired
     Environment environment;
 
+    /**
+     * 是否开启jedis
+     */
+    private String enable;
     private String maxActive;
     private String maxIdle;
     private String maxWait;
@@ -30,8 +37,6 @@ public class JedisConfig {
     private String timeout;
     private String database;
     private String port;
-    private String enable;
-    private String sysName;
     //TODO 可以继续定义数据
 
     /**
@@ -50,7 +55,6 @@ public class JedisConfig {
             timeout = environment.getProperty("redis.timeout");
             database = environment.getProperty("redis.database");
             port = environment.getProperty("redis.port");
-            sysName = environment.getProperty("redis.sysName");
             enable = environment.getProperty("redis.enable");
         } else{
             maxActive = properties.getProperty("redis.pool.maxActive");
@@ -60,7 +64,6 @@ public class JedisConfig {
             timeout = properties.getProperty("redis.timeout");
             database = properties.getProperty("redis.database");
             port = properties.getProperty("redis.port");
-            sysName = properties.getProperty("redis.sysName");
             enable = properties.getProperty("redis.enable");
         }
     }

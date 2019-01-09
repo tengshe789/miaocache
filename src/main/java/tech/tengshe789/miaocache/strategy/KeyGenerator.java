@@ -8,7 +8,7 @@ package tech.tengshe789.miaocache.strategy;
 public interface KeyGenerator {
 
     /**
-     * 生成key
+     * 将key序列化成json
      * @param key
      * @return
      */
