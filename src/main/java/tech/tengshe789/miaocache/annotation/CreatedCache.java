@@ -1,5 +1,6 @@
 package tech.tengshe789.miaocache.annotation;
 
+import org.springframework.lang.Nullable;
 import tech.tengshe789.miaocache.constants.CacheType;
 import tech.tengshe789.miaocache.constants.KeyPrefixConstants;
 import tech.tengshe789.miaocache.strategy.KeyGenerator;
@@ -25,6 +26,7 @@ public @interface CreatedCache {
      */
     public String key() default "";
 
+    @Nullable
     public String keyPrefix() default KeyPrefixConstants.DEFAULT_PREFIX;
 
     /**
@@ -35,6 +37,7 @@ public @interface CreatedCache {
 
     /**
      * key的过期时间
+     * 单位： s
      * @return
      */
     public int expire() default 720;
@@ -44,11 +47,4 @@ public @interface CreatedCache {
      * @return
      */
     public CacheType getCacheType() default CacheType.BOTH;
-
-    /**
-     * 默认key构造器
-     * @return
-     */
-    public Class<? extends KeyGenerator> generator() default DefaultKeyGenerator.class;
-
 }

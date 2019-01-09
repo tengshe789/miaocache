@@ -11,11 +11,11 @@
     </parent>
 
     <groupId>tech.tengshe789</groupId>
-    <artifactId>miaocache</artifactId>
+    <artifactId>miao-cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>miaocache</name>
+    <name>miao-cache</name>
     <description>A Simple Method of Implementing Caching</description>
 
     <developers>

@@ -1,16 +1,12 @@
 package tech.tengshe789.miaocache.annotation;
 
-import tech.tengshe789.miaocache.constants.CacheConstants;
-import tech.tengshe789.miaocache.strategy.KeyParser;
-import tech.tengshe789.miaocache.strategy.impl.DefaultKeyParser;
-
 /**
  * @program: miaocache
- * @description: 拿到缓存数据
+ * @description:
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
- * @create: 2019-01-08 18:11
+ * @create: 2019-01-09 10:31
  **/
-public @interface GetCache {
+public @interface PutCache {
     /**
      *  keyPrefix
      * @return
@@ -22,5 +18,4 @@ public @interface GetCache {
      * @return
      */
     public String key();
-
 }

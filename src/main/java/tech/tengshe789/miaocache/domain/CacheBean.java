@@ -6,10 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.validation.constraints.NotNull;
-import javax.xml.crypto.Data;
 
 /**
- * @program: miaocache
+ * @program: miao-cache
  * @description:
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  * @create: 2018-12-20 21:47
@@ -19,15 +18,14 @@ import javax.xml.crypto.Data;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CacheBean {
-    private String prefix;
+    public String prefix;
 
     @NotNull
-    private String key;
+    public String key;
 
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-    private Data expireTime;
+    public int expireTime;
 
-    private String description;
+    public String description;
 
     public CacheBean (String key) {
         this.key = key;
