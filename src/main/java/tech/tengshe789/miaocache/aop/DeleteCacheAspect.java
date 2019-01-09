@@ -46,7 +46,17 @@ public class DeleteCacheAspect {
             cacheBean.setPrefix(prefix);
             cacheBean.setKey(key);
         }else {
-            throw new CacheObjectErrorException("缓存对象不正确！必须使用CacheBean格式的缓存，请重试！");
+            throw new CacheObjectErrorException();
         }
+
+        clearCacheViaLocal(cacheBean);
+        clearCacheViaRedis(cacheBean);
+    }
+
+    private void clearCacheViaRedis(CacheBean cacheBean) {
+
+    }
+
+    private void clearCacheViaLocal(CacheBean cacheBean) {
     }
 }

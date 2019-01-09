@@ -27,9 +27,14 @@ import lombok.NoArgsConstructor;
  * @author: <a href="mailto:randyvan007@qq.com">tEngSHe789</a>
  * @create: 2018-12-20 22:47
  **/
-@NoArgsConstructor
 public class CacheObjectErrorException extends Exception {
 	private static final long serialVersionUID = 1L;
+
+	private static final String CACHE_OBJ_ERR_MSG = "缓存对象不正确！必须使用CacheBean格式的缓存，请重试！";
+
+	public CacheObjectErrorException() {
+		super(CACHE_OBJ_ERR_MSG);
+	}
 
 	public CacheObjectErrorException(String message) {
 		super(message);

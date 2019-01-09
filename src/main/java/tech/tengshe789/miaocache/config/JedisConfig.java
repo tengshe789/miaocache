@@ -1,6 +1,6 @@
 package tech.tengshe789.miaocache.config;
 
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -82,7 +82,7 @@ public class JedisConfig {
         poolConfig.setTestOnBorrow(true);
 
         JedisPool jp = null;
-        if (StringUtils.isBlank(this.password)){
+        if (StrUtil.isBlank(this.password)){
             jp = new JedisPool(poolConfig,
                     this.host,
                     Integer.parseInt(this.port),

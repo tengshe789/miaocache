@@ -1,5 +1,7 @@
 package tech.tengshe789.miaocache.annotation;
 
+import tech.tengshe789.miaocache.constants.CacheType;
+
 /**
  * @program: miaocache
  * @description:
@@ -18,4 +20,10 @@ public @interface PutCache {
      * @return
      */
     public String key();
+
+    /**
+     * 缓存类型
+     * @return
+     */
+    public CacheType getCacheType() default CacheType.BOTH;
 }

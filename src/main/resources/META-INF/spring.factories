@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    tech.tengshe789.miaocache.config.GuavaConfig,\
+    tech.tengshe789.miaocache.config.JedisConfig

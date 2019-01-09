@@ -8,3 +8,12 @@
 + spring boot 2.0.7
 + hutools
 + fastjson
+### 使用
+#### 增
+使用`@CreatCache`注解，标记在目标方法上
+#### 删
+使用`@DeleteCache`注解，标记在目标方法上
+#### 改
+使用`@PutCache`注解，标记在目标方法上
+#### 查询
+使用`@GetCache`注解，标记在目标方法上
