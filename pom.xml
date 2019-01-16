@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>tech.tengshe789</groupId>
-    <artifactId>miao-cache</artifactId>
+    <artifactId>miaocache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -24,6 +24,14 @@
             <email>randyvan007@qq.com</email>
         </developer>
     </developers>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>actable</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -116,6 +124,29 @@
 
     </dependencies>
 
+    <scm>
+        <connection>scm:git:https://github.com/tengshe789/miaocache.git</connection>
+        <developerConnection>scm:git:https://github.com/tengshe789/miaocache.git</developerConnection>
+        <url>https://github.com/tengshe789/miaocache</url>
+        <tag>0.0.1</tag>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <!-- 这个id需要在setting.xml中设置  -->
+            <id>sonatype-nexus-snapshots</id>
+            <name>OSS Snapshots Repository</name>
+            <!-- 这里的url就是Issue中回复的snapshots 的repo地址-->
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>OSS Staging Repository</name>
+            <!-- 这里的url就是Issue中回复的staging 的repo地址-->
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <finalName>${project.name}</finalName>
         <resources>
@@ -152,11 +183,6 @@
                     <source>${maven.compiler.source}</source>
                     <encoding>UTF-8</encoding>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <version>2.2.5</version>
             </plugin>
         </plugins>
     </build>
@@ -202,4 +228,3 @@
         </pluginRepository>
     </pluginRepositories>
 </project>
-
